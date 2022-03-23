@@ -9,13 +9,24 @@ return [
                 ]
             ]
         ],
-        'data' => [
-            'malformed' => 'The data provided is malformed',
+        'link' => [
+            'create' => [
+                'classic_missing_key'  => 'The input field is missing',
+                'classic_invalid_data' => 'The input field data is invalid',
+                'music_missing_key'    => 'The input field for Link Music is missing',
+                'shows_missing_key'    => 'The input field for Link Shows is missing',
+                'shows_invalid_data'   => 'The input field for Link Shows data is invalid',
+            ]
+        ]
+    ],
+    'response' => [
+        'codes' => [
+            'success'   => '200',
+            'not_found' => '404',
+            'forbidden' => '403',
         ],
-        'missing' => [
-            'context_identifier'    => 'Could not establish the %s from the incoming request',
-            'source'                => 'A source for the api has not been set',
-            'default_error_message' => 'A default error message for the api has not been set',
+        'message' => [
+            'success' => 'Success'
         ]
     ]
 ];

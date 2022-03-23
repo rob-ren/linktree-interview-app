@@ -15,10 +15,26 @@ class LinkService extends BaseService
      * we also query the realted tables link_music and link_shows
      *
      * @param string $user_id
+     * @param string $order_by
+     * @param string $order
      * @return Collection
      */
-    public function getLinksByUserId($user_id)
+    public function getLinksByUserId($user_id, $order_by, $order)
     {
         return $this->getClassData(__CLASS__, "GetLinksByUserId", func_get_args());
+    }
+
+    /**
+     * create link data and related link data
+     *
+     * @param string $name
+     * @param string $url
+     * @param string $type
+     * @param array $metadata
+     * @return boolean
+     */
+    public function addLink($name, $url, $type, $metadata)
+    {
+        return $this->saveClassData(__CLASS__, "AddLink", func_get_args());
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Links;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\Links\ByUserId\Root as RootResource;
 use App\Services\Link\LinkService;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Response;
 
 class ByUserIdController extends Controller
 {
@@ -23,17 +23,11 @@ class ByUserIdController extends Controller
         self::ORDER_BY_UPDATED_TIME
     ];
 
-    private $error;
     private $order_by = self::ORDER_BY_CREATED_TIME;
     private $order    = self::ORDER_ASC;
 
     public function index($user_id = null)
     {
-        if (empty($user_id)) {
-            $this->error->setMessage(__('api.error.links.by_user_id.missing.user_id'));
-            return $this->responseJsonError();
-        }
-
         $order_by = Request::instance()->orderBy;
         $order    = Request::instance()->order;
 
@@ -46,19 +40,8 @@ class ByUserIdController extends Controller
 
         $link_service = new LinkService();
         $response     = $link_service->getLinksByUserId($user_id, $this->order_by, $this->order);
-
-        return $response;
-    }
-
-    /**
-     * Returns the $this->error object as a JSON response
-     *
-     * @param mixed $body
-     * @param string $status
-     * @return void
-     */
-    protected function responseJsonError()
-    {
-        return response()->json($this->error, $this->error->code);
+        return (new RootResource($response))
+            ->response()
+            ->setStatusCode(__('api.response.codes.success'));
     }
 }

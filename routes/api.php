@@ -23,8 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::post(
         'link/create',
-        'Api\Link\CreateController@index'
+        'App\Http\Controllers\Api\Link\CreateController@index'
     )->name('api-v1-link-create');
+
     Route::get(
         'links/byUserId/{user_id}',
         'App\Http\Controllers\Api\Links\ByUserIdController@index'
