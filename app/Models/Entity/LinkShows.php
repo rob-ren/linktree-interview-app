@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class LinkShows extends Model
 {
+    const CREATED_AT  = 'created_time';
+    const UPDATED_AT  = 'updated_time';
+
     const STATUS_SOLD_OUT = 'sold_out';
     const STATUS_ON_SALE  = 'on_sale';
     const STATUS_NORMAL   = 'normal';
@@ -55,6 +58,7 @@ class LinkShows extends Model
 
     protected static function boot()
     {
+        parent::boot();
     }
 
     public function link()

@@ -4,16 +4,18 @@ namespace App\Services\Link\Classes;
 
 use App\Models\Entity\Link;
 use App\Models\Entity\LinkMusic;
+use App\Models\Entity\LinkShows;
 use Carbon\CarbonImmutable;
 
 class AddLink
 {
+    private $user_id = 1;
     private $name;
     private $url;
     private $type;
     private $metadata;
 
-    public function __construct($name, $url, $type, $metadata)
+    public function __construct($user, $name, $url, $type, $metadata)
     {
         $this->name     = $name;
         $this->url      = $url;
@@ -25,7 +27,8 @@ class AddLink
     {
         // save link entity
         $link               = new Link();
-        $link->name         = $this->name;
+        $link->user_id      = $this->user_id;
+        $link->title        = $this->name;
         $link->url          = $this->url;
         $link->type         = $this->type;
         $link->created_time = CarbonImmutable::now();
@@ -47,7 +50,7 @@ class AddLink
         // save link show for link
         if ($this->type == Link::TYPE_SHOW) {
             foreach ($this->metadata as $shows_data) {
-                $link_music               = new LinkMusic();
+                $link_music               = new LinkShows();
                 $link_music->link_id      = $link->id;
                 $link_music->show_date    = $shows_data->date;
                 $link_music->address      = $shows_data->address;

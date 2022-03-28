@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class LinkMusic extends Model
 {
+    const CREATED_AT  = 'created_time';
+    const UPDATED_AT  = 'updated_time';
+    
     const PLATORM_SPOTIFY = 'spotify';
     const PLATORM_YOUTUBE = 'youtube';
     // TODO:
@@ -53,6 +56,7 @@ class LinkMusic extends Model
 
     protected static function boot()
     {
+        parent::boot();
     }
 
     public function link()

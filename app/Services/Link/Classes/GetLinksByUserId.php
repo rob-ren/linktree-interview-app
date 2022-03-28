@@ -2,6 +2,8 @@
 
 namespace App\Services\Link\Classes;
 
+use App\Models\Entity\Link;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 
 class GetLinksByUserId
@@ -10,8 +12,7 @@ class GetLinksByUserId
     private $order_by;
     private $order;
 
-
-    public function __construct($user_id, $order_by, $order)
+    public function __construct($user, $user_id, $order_by, $order)
     {
         $this->user_id  = $user_id;
         $this->order_by = $order_by;
@@ -46,7 +47,12 @@ class GetLinksByUserId
          * Select * from link_music where link_id in (id1, id2, id3);
          * Select * from link_shows where link_id in (id1, id2, id3);
          */
-        return new Collection();
+        // return new Collection();
+        return Link::with(
+            ['link_music', 'link_shows']
+        )->where('user_id', $this->user_id)
+            ->orderBy($this->order_by, $this->order)
+            ->get();
     }
 
     public function getAllTheData()

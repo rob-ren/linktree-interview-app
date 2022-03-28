@@ -10,12 +10,13 @@ class Link extends JsonResource
     public function toArray($request)
     {
         return [
-            'name'        => $this->name,
+            'id'          => $this->id,
+            'title'       => $this->title,
             'url'         => $this->url,
             'type'        => $this->type,
-            'meta'        => MetaDataResource::collection($this),
-            'createdDate' => $this->created_date,
-            'updatedDate' => $this->created_date
+            'meta'        => new MetaDataResource($this),
+            'createdDate' => $this->created_time,
+            'updatedDate' => $this->updated_time
         ];
     }
 }

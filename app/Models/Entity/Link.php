@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
+    const CREATED_AT  = 'created_time';
+    const UPDATED_AT  = 'updated_time';
+
     const TYPE_CLASSIC = 'classic';
     const TYPE_MUSIC   = 'music';
     const TYPE_SHOW    = 'show';
@@ -52,6 +55,7 @@ class Link extends Model
 
     protected static function boot()
     {
+        parent::boot();
     }
 
     /**

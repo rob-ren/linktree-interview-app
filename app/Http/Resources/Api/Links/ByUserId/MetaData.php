@@ -13,17 +13,10 @@ class MetaData extends JsonResource
             return [];
         }
         if ($this->type == Link::TYPE_MUSIC) {
-            return [
-                'name' => $this->link_music->name,
-                'url'  => $this->link_music->url,
-            ];
+            return LinkMusic::collection($this->link_music);
         }
         if ($this->type == Link::TYPE_SHOW) {
-            return [
-                'date'    => $this->link_shows->date,
-                'address' => $this->link_shows->address,
-                'status'  => $this->link_shows->status,
-            ];
+            return LinkShows::collection($this->link_shows);
         }
         return [];
     }
